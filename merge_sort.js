@@ -1,72 +1,3 @@
-/*const fs = require("fs");
-
-class Merge {
-  constructor(array) {
-    this.array = array;
-  }
-
-  mergeSort(array) {
-    if (array.length <= 1) {
-      return arr;
-    }
-
-    const middle = Math.floor(this.array.length / 2);
-    const left = array.slice(0, middle);
-    const right = array.slice(middle);
-
-    const sortedLeft = this.mergeSort(left);
-    const sortedRight = this.mergeSort(right);
-
-    return this.merge(sortedLeft, sortedRight);
-  }
-
-  merge(left, right) {
-    let result = [];
-    let leftIndex = 0;
-    let rightIndex = 0;
-
-    while (leftIndex < left.length && rightIndex < right.length) {
-      if (left[leftIndex] < right[rightIndex]) {
-        result.push(left[leftIndex]);
-        leftIndex++;
-      } else {
-        result.push(right[rightIndex]);
-        rightIndex++;
-      }
-    }
-
-    while (leftIndex < left.length) {
-      result.push(left[leftIndex]);
-      leftIndex++;
-    }
-
-    while (rightIndex < right.length) {
-      result.push(right[rightIndex]);
-      rightIndex++;
-    }
-
-    return result;
-  }
-}
-
-const fileName = process.argv[2];
-
-try {
-  const data = fs.readFileSync(fileName, "utf8");
-  const numberArray = data
-    .trim()
-    .split(" ")
-    .map((num) => parseInt(num));
-  console.log("array de base:", numberArray);
-
-  const mergeSort = new Merge(numberArray);
-  const sortedArray = mergeSort.sort();
-  console.log("Merge Sort:", sortedArray);
-} catch (error) {
-  console.error(error.message);
-}
-*/
-
 const fs = require("fs");
 
 class Merge {
@@ -77,6 +8,7 @@ class Merge {
     this.comparisons = 0;
   }
 
+  //fonction qui va lire les données à partir du fichier list.txt
   readDataFromFile() {
     try {
       return fs.readFileSync(this.fileName, "utf8");
@@ -86,6 +18,7 @@ class Merge {
     }
   }
 
+  // retourne un array d'entiers
   parseData() {
     if (!this.data) return null;
     return this.data.split(" ").map((element) => parseInt(element));
@@ -93,29 +26,38 @@ class Merge {
 
   mergeSort(array) {
     if (array.length <= 1) {
+      // retourne l'array s'il contient un élément ou moins
       return array;
     }
 
+    //on cherche l'indice du milieu de l'array
     const middle = Math.floor(array.length / 2);
+    //on trie de manière récursive la moitié gauche de l'array
     const left = this.mergeSort(array.slice(0, middle));
+    //puis on fait pareil avec le côté droit
     const right = this.mergeSort(array.slice(middle));
+    //on retourne les deux moitiés triées
     return this.merge(left, right);
   }
 
+  //fusionne les deux tableaux triés
   merge(left, right) {
     let i = 0;
     let j = 0;
     let result = [];
     while (i < left.length && j < right.length) {
+      //si l'élément du tableau de droite est supérieur à l'élément du tableau de gauche
       if (right[j] > left[i]) {
+        //on ajoute l'élément du tableau de gauche au résultat + on incrémente l'indice du tableau de gauche
         result.push(left[i]);
         i++;
       } else {
         result.push(right[j]);
         j++;
       }
+      this.comparisons++;
     }
-
+    //on ajoute les éléments restants des tableaux gauche et droite s'il y en a
     while (i < left.length) {
       result.push(left[i]);
       i++;
@@ -124,7 +66,6 @@ class Merge {
       result.push(right[j]);
       j++;
     }
-    this.comparisons++;
     return result;
   }
 }

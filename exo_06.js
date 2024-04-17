@@ -1,15 +1,20 @@
 //Résous le sujet 2 en ne faisant qu'un seul passage sur ta liste.
 
 function buildingWithView(arr) {
+  // on initialise deux variables : compteur pour le nb de bâtiments avec vue et hauteur maximale des bâtiments
   let count = 0;
-  let maxHeight = 0;
+  let maxHeight = 0; 
 
-  for (let i = arr.length - 1; i >= 0; i--) {
+  //on parcourt l'array de droite à gauche
+  for (let i = arr.length - 1; i >= 0; i--) { 
     const currentHeight = arr[i];
 
-    if (currentHeight > maxHeight) {
-      count++;
-      maxHeight = currentHeight;
+    // si la hauteur actuelle est supérieur à la hauteur max
+    if (currentHeight > maxHeight) { 
+      // on incrémente le nb de bâtiments avec vue
+      count++; 
+      // et la la hauteur actuelle devient la hauteur max
+      maxHeight = currentHeight; 
     }
   }
   return count;
