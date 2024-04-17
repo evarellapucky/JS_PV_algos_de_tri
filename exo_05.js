@@ -1,3 +1,5 @@
+//Résous le sujet 1 en ne faisant qu'un seul passage sur ta liste.
+
 function addingNumbersToFindK(arr, k) {
   const sumPair = {};
   for (let i = 0; i < arr.length; i++) {

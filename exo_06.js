@@ -1,3 +1,5 @@
+//Résous le sujet 2 en ne faisant qu'un seul passage sur ta liste.
+
 function buildingWithView(arr) {
   let count = 0;
   let maxHeight = 0;
