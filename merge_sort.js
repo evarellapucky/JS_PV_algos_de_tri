@@ -11,6 +11,11 @@ class Merge {
   //fonction qui va lire les données à partir du fichier list.txt
   readDataFromFile() {
     try {
+      // Vérifier si le fichier existe
+      if (!fs.existsSync(this.fileName)) {
+        throw new Error(`Le fichier '${this.fileName}' n'existe pas.`);
+      }
+  
       return fs.readFileSync(this.fileName, "utf8");
     } catch (error) {
       console.error(error.message);
@@ -25,8 +30,7 @@ class Merge {
   }
 
   mergeSort(array) {
-    if (array.length <= 1) {
-      // retourne l'array s'il contient un élément ou moins
+    if (!array || array.length <= 1) {
       return array;
     }
 
